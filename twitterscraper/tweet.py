@@ -118,13 +118,16 @@ class Tweet:
                 'screen_name': user.text.strip('@'),
                 'user_id': user['data-user-id']
             } for user in soup_reply_to_users]
-
-        return cls(
-            screen_name, username, user_id, tweet_id, tweet_url, timestamp,
-            timestamp_epochs, text, text_html, links, hashtags, has_media,
-            img_urls, video_url, likes, retweets, replies, is_replied,
-            is_reply_to, parent_tweet_id, reply_to_users
-        )
+        
+        if video_url == '':
+            return
+        else:
+            return cls(
+                screen_name, username, user_id, tweet_id, tweet_url, timestamp,
+                timestamp_epochs, text, text_html, links, hashtags, has_media,
+                img_urls, video_url, likes, retweets, replies, is_replied,
+                is_reply_to, parent_tweet_id, reply_to_users
+            )
 
     @classmethod
     def from_html(cls, html):
